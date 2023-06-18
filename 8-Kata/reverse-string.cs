@@ -16,3 +16,6 @@ public static class Kata
     return string.Join("", charArray);
     }
 }
+
+// Best practice : return new string(str.ToArray().Reverse().ToArray());
+// A better one : return string.Concat(str.Reverse());
