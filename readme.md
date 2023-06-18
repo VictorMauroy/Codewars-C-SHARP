@@ -2,7 +2,6 @@
 In this document, I'm adding some tips useful for C# development and some best practices good to know. 
 
 ## <span style="color: green"><u>**Functions & Methods**</u></span>
-<hr>
 
 #### **Lambda expression** 
 Useful for one line functions </br>
@@ -45,7 +44,6 @@ int product = numbers.Aggregate(1, (acc, num) => acc * num);
 `Aggregate(1, ...)` 1 is the default value of the accumulator, if not set, the default value is 0. (That's a huge problem for a multiplication... !)
 
 ## <span style="color: green"><u>**Conversions**</u></span>
-<hr>
 
 #### **Int to string**
 Where `i` is the integer to convert.
