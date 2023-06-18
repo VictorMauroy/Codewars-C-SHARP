@@ -1,7 +1,7 @@
 # ***Best practices and good to know***
 In this document, I'm adding some tips useful for C# development and some best practices good to know. 
 
-## <span style="color: green"><u>**Functions**</u></span>
+## <span style="color: green"><u>**Functions & Methods**</u></span>
 <hr>
 
 #### **Lambda expression** 
@@ -21,7 +21,7 @@ That really shines when you don't want to make multiples lines calculations. Her
 </br>
 
 #### **Enumarable.Aggregate**
-Applies an accumulator function over a sequence.<br>
+Applies an accumulator function over a sequence. Usually used for lists or arrays.<br>
 <span style="color: red">Require : using System.Linq;</span>
 
 
@@ -43,3 +43,18 @@ The aggregate function works with a lambda expression.<br>
 int product = numbers.Aggregate(1, (acc, num) => acc * num);
 ```
 `Aggregate(1, ...)` 1 is the default value of the accumulator, if not set, the default value is 0. (That's a huge problem for a multiplication... !)
+
+## <span style="color: green"><u>**Conversions**</u></span>
+<hr>
+
+#### **Int to string**
+Where `i` is the integer to convert.
+```bash
+string a = i.ToString();
+string b = Convert.ToString(i);
+string c = string.Format("{0}", i);
+string d = $"{i}";
+string e = "" + i;
+string f = string.Empty + i;
+string g = new StringBuilder().Append(i).ToString();
+```
