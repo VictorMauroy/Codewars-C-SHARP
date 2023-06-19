@@ -1,9 +1,9 @@
-# ***Best practices and good to know***
+# ***Best practices and good to know in C#***
 In this document, I'm adding some tips useful for C# development and some best practices good to know. 
 
 ## <span style="color: green"><u>**Functions & Methods**</u></span>
 
-#### **Lambda expression** 
+### **Lambda expression** 
 Useful for one line functions </br>
 ```bash
 public static string EvenOrOdd(int number)
@@ -19,7 +19,7 @@ int product = numbers.Aggregate(1, (interim, next) => interim * next);
 That really shines when you don't want to make multiples lines calculations. Here, the aggregate function works like the `Array.reduce()` in Javascript.
 </br>
 
-#### **Enumarable.Aggregate**
+### **Enumarable.Aggregate**
 Applies an accumulator function over a sequence. Usually used for lists or arrays.<br>
 <span style="color: red">Require : using System.Linq;</span>
 
@@ -43,9 +43,36 @@ int product = numbers.Aggregate(1, (acc, num) => acc * num);
 ```
 `Aggregate(1, ...)` 1 is the default value of the accumulator, if not set, the default value is 0. (That's a huge problem for a multiplication... !)
 
+### **Enumarable.Select**
+Return an array or a list with each element modified depending of your instuction inside the Select brackets.<br>
+<span style="color: red">Require : using System.Linq;</span>
+
+For example, we must multiply each element of an array by 2.
+```bash
+int[] numbers = { 1, 2, 3, 4, 5 };
+```
+We can do that with the Select method :
+```bash
+var multipliedNumbers = numbers.Select(num => num * 2);
+```
+
+### **Enumarable.Where**
+Return an array or a list filtered by a given condition.<br>
+<span style="color: red">Require : using System.Linq;</span>
+For example, we must multiply each element of an array by 2, <u>but</u> only the ones that are multiples of 2.
+```bash
+int[] numbers = { 1, 2, 3, 4, 5 };
+```
+We can do that with the Select and Where methods :
+```bash
+var filteredAndMultipliedNumbers = numbers
+    .Where(num => num % 2 == 0) //The condition is modulo 2
+    .Select(num => num * 2);
+```
+
 ## <span style="color: green"><u>**Conversions**</u></span>
 
-#### **Int to string**
+### **Int to string**
 Where `i` is the integer to convert.
 ```bash
 string a = i.ToString();
