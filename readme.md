@@ -71,6 +71,16 @@ var filteredAndMultipliedNumbers = numbers
 ```
 The result will be a list {4, 8}. (2x2 and 4x2).
 
+### **Merge string array values**
+A few methods to merge values of an array.<br>
+```bash
+String.Concat(yourArray);
+```
+```bash
+String.Join("", yourArray); //Where "" is the separator that between each element. 
+```
+
+
 ## <span style="color: green"><u>**Conversions**</u></span>
 
 ### **Int to string**
