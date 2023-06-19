@@ -69,6 +69,7 @@ var filteredAndMultipliedNumbers = numbers
     .Where(num => num % 2 == 0) //The condition is modulo 2
     .Select(num => num * 2);
 ```
+The result will be a list {4, 8}. (2x2 and 4x2).
 
 ## <span style="color: green"><u>**Conversions**</u></span>
 
