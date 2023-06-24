@@ -17,9 +17,12 @@ int[] numbers = { 4, 7, 10 };
 int product = numbers.Aggregate(1, (interim, next) => interim * next); 
 ```
 That really shines when you don't want to make multiples lines calculations. Here, the aggregate function works like the `Array.reduce()` in Javascript.
-</br>
+</br><br>
 
-### **Enumarable.Aggregate**
+### ***Arrays manipulation*** 
+
+#### **Enumarable.Aggregate**
+
 Applies an accumulator function over a sequence. Usually used for lists or arrays.<br>
 <span style="color: red">Require : using System.Linq;</span>
 
@@ -43,7 +46,7 @@ int product = numbers.Aggregate(1, (acc, num) => acc * num);
 ```
 `Aggregate(1, ...)` 1 is the default value of the accumulator, if not set, the default value is 0. (That's a huge problem for a multiplication... !)
 
-### **Enumarable.Select**
+#### **Enumarable.Select**
 Return an array or a list with each element modified depending of your instuction inside the Select brackets.<br>
 <span style="color: red">Require : using System.Linq;</span>
 
@@ -56,7 +59,7 @@ We can do that with the Select method :
 var multipliedNumbers = numbers.Select(num => num * 2);
 ```
 
-### **Enumarable.Where**
+#### **Enumarable.Where**
 Return an array or a list filtered by a given condition.<br>
 <span style="color: red">Require : using System.Linq;</span>
 For example, we must multiply each element of an array by 2, <u>but</u> only the ones that are multiples of 2.
@@ -71,15 +74,28 @@ var filteredAndMultipliedNumbers = numbers
 ```
 The result will be a list {4, 8}. (2x2 and 4x2).
 
-### **Merge string array values**
+#### **Merge string array values**
 A few methods to merge values of an array.<br>
 ```bash
 String.Concat(yourArray);
 ```
 ```bash
-String.Join("", yourArray); //Where "" is the separator that between each element. 
+String.Join("", yourArray); 
+//Where "" is the separator that must appear between each element.
 ```
 
+#### **Get a range of values**
+We want to obtain values at index 3 to 7 from an array of 10 values :
+```bash
+int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+```
+After C# 8. It is possible to use the range operator :
+```bash
+int[] middleNumbers = numbers[3..8];
+// ==> middleNumbers = {4, 5, 6, 7, 8}
+```
+Note that the first value is included but the second one is excluded.
+<br>
 
 ## <span style="color: green"><u>**Conversions**</u></span>
 
