@@ -117,16 +117,21 @@ IDictionary<string, string[]> citiesPeoples = new Dictionary<string, string[]>()
 
 ### **Adding and updating values**
 ```bash
-
+myDictionary.Add("txt", "notepad.exe");
+```
+```bash
+myDictionary["txt"] = "notepad.exe";
+```
+### **Checking key or values**
+```bash
+if(myDictionary.TryGetValue("txt", out theValue)) {}
 ```
 
-### **Accessing key and values**
 ```bash
-
+if(myDictionary.ContainsKey("txt")) {}
 ```
-
 ```bash
-
+if(myDictionary.ContainsValue("notepad.exe")) {}
 ```
 
 ### **Iteration on dictionaries**
@@ -147,6 +152,7 @@ foreach( KeyValuePair<string, string> kvp in openWith )
     );
 }
 ```
+
 <details>
 <summary>Acces keys or values distinctly </summary>
 <br>
