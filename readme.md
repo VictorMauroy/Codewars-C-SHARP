@@ -1,9 +1,8 @@
 # ***Best practices and good to know in C#***
 In this document, I'm adding some tips useful for C# development and some best practices good to know. 
 
-## <span style="color: green"><u>**Functions & Methods**</u></span>
+## <span style="color: green"><u>**Lambda expression**</u></span>
 
-### **Lambda expression** 
 Useful for one line functions </br>
 ```bash
 public static string EvenOrOdd(int number)
@@ -11,17 +10,17 @@ public static string EvenOrOdd(int number)
 ```
 
 
-Can also be used that way : </br>
+Some methods also use it : </br>
 ```bash
-int[] numbers = { 4, 7, 10 };
+int[] numbers = [ 4, 7, 10 ];
 int product = numbers.Aggregate(1, (interim, next) => interim * next); 
 ```
 That really shines when you don't want to make multiples lines calculations. Here, the aggregate function works like the `Array.reduce()` in Javascript.
 </br><br>
 
-### ***Arrays manipulation*** 
+## <span style="color: green"><u>**Arrays methods**</u></span>
 
-#### **Enumarable.Aggregate**
+### **Enumarable.Aggregate**
 
 Applies an accumulator function over a sequence. Usually used for lists or arrays.<br>
 <span style="color: red">Require : using System.Linq;</span>
@@ -29,7 +28,7 @@ Applies an accumulator function over a sequence. Usually used for lists or array
 
 For example, we must get the sum of every number in a given array :
 ```bash
-int[] numbers = { 1, 2, 3, 4, 5 };
+int[] numbers = [ 1, 2, 3, 4, 5 ];
 ```
 We can do that with the aggregate method :
 ```bash
@@ -46,25 +45,25 @@ int product = numbers.Aggregate(1, (acc, num) => acc * num);
 ```
 `Aggregate(1, ...)` 1 is the default value of the accumulator, if not set, the default value is 0. (That's a huge problem for a multiplication... !)
 
-#### **Enumarable.Select**
+### **Enumarable.Select**
 Return an array or a list with each element modified depending of your instuction inside the Select brackets.<br>
 <span style="color: red">Require : using System.Linq;</span>
 
 For example, we must multiply each element of an array by 2.
 ```bash
-int[] numbers = { 1, 2, 3, 4, 5 };
+int[] numbers = [ 1, 2, 3, 4, 5 ];
 ```
 We can do that with the Select method :
 ```bash
 var multipliedNumbers = numbers.Select(num => num * 2);
 ```
 
-#### **Enumarable.Where**
+### **Enumarable.Where**
 Return an array or a list filtered by a given condition.<br>
 <span style="color: red">Require : using System.Linq;</span>
 For example, we must multiply each element of an array by 2, <u>but</u> only the ones that are multiples of 2.
 ```bash
-int[] numbers = { 1, 2, 3, 4, 5 };
+int[] numbers = [ 1, 2, 3, 4, 5 ];
 ```
 We can do that with the Select and Where methods :
 ```bash
@@ -74,27 +73,122 @@ var filteredAndMultipliedNumbers = numbers
 ```
 The result will be a list {4, 8}. (2x2 and 4x2).
 
-#### **Merge string array values**
+### **Merge string array values**
 A few methods to merge values of an array.<br>
 ```bash
 String.Concat(yourArray);
 ```
 ```bash
-String.Join("", yourArray); 
+String.Join("", yourArray);
 //Where "" is the separator that must appear between each element.
 ```
 
-#### **Get a range of values**
+### **Get a range of values**
 We want to obtain values at index 3 to 7 from an array of 10 values :
 ```bash
-int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+int[] numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 ```
 After C# 8. It is possible to use the range operator :
 ```bash
 int[] middleNumbers = numbers[3..8];
-// ==> middleNumbers = {4, 5, 6, 7, 8}
+// ==> middleNumbers = [4, 5, 6, 7, 8]
 ```
 Note that the first value is included but the second one is excluded.
+<br>
+
+## <span style="color: green"><u>**Dictionaries**</u></span>
+
+Dictionaries are interesting to save values in a different way than arrays or lists. <br>
+It allows to save a **value** for a special **key** index. <br>
+Where the key can be anything, usually a string or a int and the value can also be a string, int or an array, a list, etc.
+<br>
+<br>
+Require : using System.Collections.Generic;
+
+### **Creating a new dictionary**
+```bash
+IDictionary<int, int> numberOccurence = new Dictionary<int, int>(); 
+// One integer and its occurence count 
+```
+```bash
+IDictionary<string, string[]> citiesPeoples = new Dictionary<string, string[]>(); 
+// One city name for many people names
+```
+
+### **Adding and updating values**
+```bash
+
+```
+
+### **Accessing key and values**
+```bash
+
+```
+
+```bash
+
+```
+
+### **Iteration on dictionaries**
+Require : using System.Linq; to use ElementAt(index)
+```bash
+for(int i =0; i < numberOccurence.Count; i++) 
+{
+    if(numberOccurence.ElementAt(i).Value % 2 != 0) 
+        return numberOccurence.ElementAt(i).Key;
+}
+```
+```bash
+foreach( KeyValuePair<string, string> kvp in openWith )
+{
+    Console.WriteLine(
+        "Key = {0}, Value = {1}",
+        kvp.Key, kvp.Value
+    );
+}
+```
+<details>
+<summary>Acces keys or values distinctly </summary>
+<br>
+
+An exemple with a simple dictionary : 
+```bash
+Dictionary<string, string> openWith =
+    new Dictionary<string, string>();
+```
+
+**Itering on the values (only)**
+```bash
+Dictionary<string, string>.ValueCollection valueColl =
+    openWith.Values;
+
+// The elements of the ValueCollection are strongly typed
+// with the type that was specified for dictionary values.
+Console.WriteLine();
+foreach( string s in valueColl )
+{
+    Console.WriteLine("Value = {0}", s);
+}
+```
+<br>
+
+**Itering on the keys (only)**
+
+```bash
+// To get the keys alone, use the Keys property.
+Dictionary<string, string>.KeyCollection keyColl =
+    openWith.Keys;
+
+// The elements of the KeyCollection are strongly typed
+// with the type that was specified for dictionary keys.
+Console.WriteLine();
+foreach( string s in keyColl )
+{
+    Console.WriteLine("Key = {0}", s);
+}
+```
+
+</details>
 <br>
 
 ## <span style="color: green"><u>**Conversions**</u></span>
