@@ -17,6 +17,31 @@ public class Kata
   => String.Join("", message.Select(c => Char.IsLetter(c) ? ((char)(((int)Char.ToUpper(c) - 65 + 13) < 26 ? (int)c + 13 : (int)c + 13 - 26)) : c ));
 }
 
+// Extended version:
+
+using System;
+
+public class Kata
+{
+  public static string Rot13(string message)
+  {
+    string messageRot13 = "";
+    foreach(char c in message){
+      char updatedChar = c;
+      if(Char.IsLetter(c)){
+        updatedChar = 
+          (char)(((int)Char.ToUpper(c) - 65 + 13) < 26 ? (int)c + 13 : (int)c + 13 - 26);
+      } 
+      messageRot13 += updatedChar;
+    }
+    
+    return messageRot13;
+  }
+}
+
+
+
+
 /* Best:
 
 public static string Rot13(string message)
