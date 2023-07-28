@@ -75,24 +75,21 @@ public static string GetStringValue(int number) => c switch
     _ => "Other"
 };
 ```
-```csharp
-int data = 42;
-string result = GetDataStatus(data);
 
-static string GetDataStatus(int data)
+```csharp
+public static string GetDataStatus(int data)
 {
     return data switch
     {
         int value when value > 0 && value <= 100 => "Valid data",
         int value when value > 100 => "Out of range",
         int value when value <= 0 => "Invalid data",
-        string str when string.IsNullOrEmpty(str) => "Empty string",
-        string str => $"String with {str.Length} characters",
         _ => "Unknown data"
     };
 }
 ```
-`when` is a keyword that can be used when doing specific operations, likes returning a new variable that is yet to be set.
+`when` is a keyword that can be used when doing specific operations, like returning a new variable that is yet to be set. <br>
+Note: In the last function, which uses the `when` keyword, we define an `int value`. `value` will automaticaly store the value of the switch parameter `data` and we will be also to do checks and operations on it.
 
 ## <span style="color: green"><u>**Arrays methods**</u></span>
 
