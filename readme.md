@@ -40,7 +40,7 @@ switch(enemyBehavior)
         break;
     
     case Behavior.Passive:
-        // Do something
+        // Do something else
         break;
     
     default:
@@ -76,12 +76,21 @@ public static string GetStringValue(int number) => c switch
 };
 ```
 ```csharp
-public static char Encode(char c) => c switch
+int data = 42;
+string result = GetDataStatus(data);
+
+static string GetDataStatus(int data)
 {
-    char s when Regex.IsMatch(s.ToString(), "[A-Ma-m]") => (char)(c + 13),
-    char s when Regex.IsMatch(s.ToString(), "[N-Zn-z]") => (char)(c - 13),
-    _ => c
-};
+    return data switch
+    {
+        int value when value > 0 && value <= 100 => "Valid data",
+        int value when value > 100 => "Out of range",
+        int value when value <= 0 => "Invalid data",
+        string str when string.IsNullOrEmpty(str) => "Empty string",
+        string str => $"String with {str.Length} characters",
+        _ => "Unknown data"
+    };
+}
 ```
 `when` is a keyword that can be used when doing specific operations, likes returning a new variable that is yet to be set.
 
