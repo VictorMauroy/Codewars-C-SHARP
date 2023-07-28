@@ -21,6 +21,10 @@ That really shines when you don't want to make multiples lines calculations. Her
 ## <span style="color: green"><u>**Switch expression**</u></span>
 ### **Traditionnal switch case**
 
+**Switch utility:** The switch case expression allows to do specific actions depending of a given value. In some case, it could be a good idea to replace an `if{} else if{} else{}` by a switch case.
+
+Note that the traditionnal switch case can only work with `integer`, `enum`, `char` and `string`.
+
 ```csharp
 enum Behavior {
     Agressive,
@@ -44,9 +48,12 @@ switch(enemyBehavior)
         break;
 }
 ```
+`switch` => depending of (your value). <br>
+`case` => in case your value is equal to (a value). <br>
+`default` => default action if it didn't matched any case.
 
 ### **Enhanced switch expression**
-
+Introduced in C# 8.0. The switch expression is an enhancement over the traditional switch statement, which can only be used to evaluate discrete values.
 ```csharp
 int number = 2;
 string result = number switch
@@ -58,6 +65,25 @@ string result = number switch
 };
 ```
 The above expression will return a different string depending of the number we gave it. Currently, it will return "Two" because we gave it an integer with the value 2. 
+
+It can be used to **switftly return a result for a function** :
+```csharp
+public static string GetStringValue(int number) => c switch
+{
+    15 => "Quinze",
+    29 => "Vingt-neuf",
+    _ => "Other"
+};
+```
+```csharp
+public static char Encode(char c) => c switch
+{
+    char s when Regex.IsMatch(s.ToString(), "[A-Ma-m]") => (char)(c + 13),
+    char s when Regex.IsMatch(s.ToString(), "[N-Zn-z]") => (char)(c - 13),
+    _ => c
+};
+```
+`when` is a keyword that can be used when doing specific operations, likes returning a new variable that is yet to be set.
 
 ## <span style="color: green"><u>**Arrays methods**</u></span>
 
