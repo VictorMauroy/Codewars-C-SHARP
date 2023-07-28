@@ -18,6 +18,47 @@ int product = numbers.Aggregate(1, (interim, next) => interim * next);
 That really shines when you don't want to make multiples lines calculations. Here, the aggregate function works like the `Array.reduce()` in Javascript.
 </br><br>
 
+## <span style="color: green"><u>**Switch expression**</u></span>
+### **Traditionnal switch case**
+
+```csharp
+enum Behavior {
+    Agressive,
+    Passive
+}
+
+Behavior enemyBehavior = Behavior.Agressive;
+
+switch(enemyBehavior)
+{
+    case Behavior.Agressive:
+        // Do something
+        break;
+    
+    case Behavior.Passive:
+        // Do something
+        break;
+    
+    default:
+        //Do something when it did not matched any cases
+        break;
+}
+```
+
+### **Enhanced switch expression**
+
+```csharp
+int number = 2;
+string result = number switch
+{
+    1 => "One",
+    2 => "Two",
+    3 => "Three",
+    _ => "Other"
+};
+```
+The above expression will return a different string depending of the number we gave it. Currently, it will return "Two" because we gave it an integer with the value 2. 
+
 ## <span style="color: green"><u>**Arrays methods**</u></span>
 
 ### **Enumarable.Aggregate**
