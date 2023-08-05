@@ -1,6 +1,24 @@
 # ***Best practices and good to know in C#***
 In this document, I'm adding some tips useful for C# development and some best practices good to know. 
 
+**TABLE OF CONTENTS**
+* [**Lambda**](#lambda-expression)
+* [**Switch expressions**](#switch-expression)
+    - [Traditionnal](#traditionnal-switch-case)
+    - [Enhanced](#enhanced-switch-expression)
+* [**LINQ and Arrays**](#linq-and-arrays-methods)
+    - [Aggregate](#enumarableaggregate)
+    - [Select](#enumarableselect)
+    - [Where](#enumarablewhere)
+    - [Arrays](#merge-string-array-values)
+* [**Dictionnaries**](#dictionaries)
+    - [Create](#creating-a-new-dictionary)
+    - [Update](#adding-and-updating-values)
+    - [Check](#checking-key-or-values)
+    - [Iteration](#iteration-on-dictionaries)
+* [**Conversions**](#conversions)
+* [**Errors**](#manage-errors)
+
 ## <span style="color: green"><u>**Lambda expression**</u></span>
 
 Useful for one line functions </br>
@@ -91,7 +109,7 @@ public static string GetDataStatus(int data)
 `when` is a keyword that can be used when doing specific operations, like returning a new variable that is yet to be set. <br>
 Note: In the last function, which uses the `when` keyword, we define an `int value`. `value` will automaticaly store the value of the switch parameter `data` and we will be also to do checks and operations on it.
 
-## <span style="color: green"><u>**Arrays methods**</u></span>
+## <span style="color: green"><u>**LINQ and Arrays methods**</u></span>
 
 ### **Enumarable.Aggregate**
 
@@ -286,7 +304,7 @@ string g = new StringBuilder().Append(i).ToString();
 
 
 
-## <span style="color: green"><u>**Gestion d'erreurs**</u></span>
+## <span style="color: green"><u>**Manage errors**</u></span>
 Explaination: https://www.w3schools.com/cs/cs_exceptions.php
 
 ### **Try Catch**
