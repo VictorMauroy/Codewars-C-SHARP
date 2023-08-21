@@ -30,7 +30,7 @@ public static string EvenOrOdd(int number)
 
 Some methods also use it : </br>
 ```bash
-int[] numbers = [ 4, 7, 10 ];
+int[] numbers = { 4, 7, 10 };
 int product = numbers.Aggregate(1, (interim, next) => interim * next); 
 ```
 That really shines when you don't want to make multiples lines calculations. Here, the aggregate function works like the `Array.reduce()` in Javascript.
@@ -119,7 +119,7 @@ Applies an accumulator function over a sequence. Usually used for lists or array
 
 For example, we must get the sum of every number in a given array :
 ```bash
-int[] numbers = [ 1, 2, 3, 4, 5 ];
+int[] numbers = { 1, 2, 3, 4, 5 };
 ```
 We can do that with the aggregate method :
 ```bash
@@ -142,7 +142,7 @@ Return an array or a list with each element modified depending of your instuctio
 
 For example, we must multiply each element of an array by 2.
 ```bash
-int[] numbers = [ 1, 2, 3, 4, 5 ];
+int[] numbers = { 1, 2, 3, 4, 5 };
 ```
 We can do that with the Select method :
 ```bash
@@ -154,7 +154,7 @@ Return an array or a list filtered by a given condition.<br>
 <span style="color: red">Require : using System.Linq;</span>
 For example, we must multiply each element of an array by 2, <u>but</u> only the ones that are multiples of 2.
 ```bash
-int[] numbers = [ 1, 2, 3, 4, 5 ];
+int[] numbers = { 1, 2, 3, 4, 5 };
 ```
 We can do that with the Select and Where methods :
 ```bash
@@ -177,7 +177,7 @@ String.Join("", yourArray);
 ### **Get a range of values**
 We want to obtain values at index 3 to 7 from an array of 10 values :
 ```bash
-int[] numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 ```
 After C# 8. It is possible to use the range operator :
 ```bash
@@ -315,7 +315,7 @@ The `catch` statement allows you to define a block of code to be executed, if an
 ```csharp
 try
 {
-  int[] myNumbers = {1, 2, 3};
+  int[] myNumbers = { 1, 2, 3 };
   Console.WriteLine(myNumbers[10]);
 }
 catch (Exception e)
@@ -346,7 +346,7 @@ The `finally` statement lets you execute code, after try...catch, regardless of 
 ```csharp
 try
 {
-  int[] myNumbers = {1, 2, 3};
+  int[] myNumbers = { 1, 2, 3 };
   Console.WriteLine(myNumbers[10]);
 }
 catch (Exception e)
