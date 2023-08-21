@@ -48,17 +48,19 @@ using System.Linq;
 public class DirReduction {
   
     public static string[] dirReduc(String[] arr) {
-      List<string> result = new List<string>(arr);
+      string[] result = arr;
       
       for(int i = 0; i < arr.Length-1; i++){
         if(DirReduction.NextIsOpposite(arr[i], arr[i+1])){
-          result.RemoveAt(i);
-          result.RemoveAt(i+1);
-          result = dirReduc(result.ToArray());
+          result = dirReduc(
+            i+2 < arr.Length ? 
+              arr[0..i].Concat(arr[(i+2)..]).ToArray() :
+              arr[0..i]
+          );
           break;
         }
       }
-      return result.ToArray();
+      return result;
     }
   
     private static bool NextIsOpposite(string current, string next){
@@ -66,11 +68,45 @@ public class DirReduction {
       string nextWord = next.ToString().ToUpper();
       
       if(currentWord == "NORTH" && nextWord == "SOUTH" 
-         || currentWord == "SOUTH" && nextWord == "NORTH"
-         || currentWord == "EAST" && nextWord == "WEST"
-         || currentWord == "WEST" && nextWord == "EAST")
+          || currentWord == "SOUTH" && nextWord == "NORTH"
+          || currentWord == "EAST" && nextWord == "WEST"
+          || currentWord == "WEST" && nextWord == "EAST")
         return true;
       
       return false;
     }
+}
+
+
+
+
+
+/* Interesting ideas (not by me) */
+
+public static String[] dirReduc(String[] arr) 
+{
+  Stack<String> stack = new Stack<String>();
+
+  foreach (String direction in arr) {
+      String lastElement = stack.Count > 0 ? stack.Peek().ToString() : null;
+
+      switch(direction) {
+          case "NORTH": if ("SOUTH".Equals(lastElement)) { stack.Pop(); } else { stack.Push(direction); } break;
+          case "SOUTH": if ("NORTH".Equals(lastElement)) { stack.Pop(); } else { stack.Push(direction); } break;
+          case "EAST":  if ("WEST".Equals(lastElement)) { stack.Pop(); } else { stack.Push(direction); } break;
+          case "WEST":  if ("EAST".Equals(lastElement)) { stack.Pop(); } else { stack.Push(direction); } break;
+      }
+  }
+  String[] result = stack.ToArray();        
+  Array.Reverse(result);
+  
+  return result;               
+}
+
+
+public static string[] dirReduc(String[] arr) {
+  var dir = String.Join(" ",arr);
+  var dir2 = dir.Replace("NORTH SOUTH","").Replace("SOUTH NORTH","").Replace("EAST WEST","").Replace("WEST EAST","");
+  var dir3 = dir2.Split(" ").Where(s=>!string.IsNullOrEmpty(s)).ToArray();
+  return dir3.Length < arr.Length ? dirReduc(dir3): dir3;
 }
