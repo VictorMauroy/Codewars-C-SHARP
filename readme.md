@@ -1,6 +1,24 @@
 # ***Best practices and good to know in C#***
 In this document, I'm adding some tips useful for C# development and some best practices good to know. 
 
+**TABLE OF CONTENTS**
+* [**Lambda**](#lambda-expression)
+* [**Switch expressions**](#switch-expression)
+    - [Traditionnal](#traditionnal-switch-case)
+    - [Enhanced](#enhanced-switch-expression)
+* [**LINQ and Arrays**](#linq-and-arrays-methods)
+    - [Aggregate](#enumarableaggregate)
+    - [Select](#enumarableselect)
+    - [Where](#enumarablewhere)
+    - [Arrays](#merge-string-array-values)
+* [**Dictionnaries**](#dictionaries)
+    - [Create](#creating-a-new-dictionary)
+    - [Update](#adding-and-updating-values)
+    - [Check](#checking-key-or-values)
+    - [Iteration](#iteration-on-dictionaries)
+* [**Conversions**](#conversions)
+* [**Errors**](#manage-errors)
+
 ## <span style="color: green"><u>**Lambda expression**</u></span>
 
 Useful for one line functions </br>
@@ -12,7 +30,7 @@ public static string EvenOrOdd(int number)
 
 Some methods also use it : </br>
 ```bash
-int[] numbers = [ 4, 7, 10 ];
+int[] numbers = { 4, 7, 10 };
 int product = numbers.Aggregate(1, (interim, next) => interim * next); 
 ```
 That really shines when you don't want to make multiples lines calculations. Here, the aggregate function works like the `Array.reduce()` in Javascript.
@@ -91,7 +109,7 @@ public static string GetDataStatus(int data)
 `when` is a keyword that can be used when doing specific operations, like returning a new variable that is yet to be set. <br>
 Note: In the last function, which uses the `when` keyword, we define an `int value`. `value` will automaticaly store the value of the switch parameter `data` and we will be also to do checks and operations on it.
 
-## <span style="color: green"><u>**Arrays methods**</u></span>
+## <span style="color: green"><u>**LINQ and Arrays methods**</u></span>
 
 ### **Enumarable.Aggregate**
 
@@ -101,7 +119,7 @@ Applies an accumulator function over a sequence. Usually used for lists or array
 
 For example, we must get the sum of every number in a given array :
 ```bash
-int[] numbers = [ 1, 2, 3, 4, 5 ];
+int[] numbers = { 1, 2, 3, 4, 5 };
 ```
 We can do that with the aggregate method :
 ```bash
@@ -124,7 +142,7 @@ Return an array or a list with each element modified depending of your instuctio
 
 For example, we must multiply each element of an array by 2.
 ```bash
-int[] numbers = [ 1, 2, 3, 4, 5 ];
+int[] numbers = { 1, 2, 3, 4, 5 };
 ```
 We can do that with the Select method :
 ```bash
@@ -136,7 +154,7 @@ Return an array or a list filtered by a given condition.<br>
 <span style="color: red">Require : using System.Linq;</span>
 For example, we must multiply each element of an array by 2, <u>but</u> only the ones that are multiples of 2.
 ```bash
-int[] numbers = [ 1, 2, 3, 4, 5 ];
+int[] numbers = { 1, 2, 3, 4, 5 };
 ```
 We can do that with the Select and Where methods :
 ```bash
@@ -159,7 +177,7 @@ String.Join("", yourArray);
 ### **Get a range of values**
 We want to obtain values at index 3 to 7 from an array of 10 values :
 ```bash
-int[] numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 ```
 After C# 8. It is possible to use the range operator :
 ```bash
@@ -282,4 +300,76 @@ string d = $"{i}";
 string e = "" + i;
 string f = string.Empty + i;
 string g = new StringBuilder().Append(i).ToString();
+```
+
+
+
+## <span style="color: green"><u>**Manage errors**</u></span>
+Explaination: https://www.w3schools.com/cs/cs_exceptions.php
+
+### **Try Catch**
+The `try` statement allows you to define a block of code to be tested for errors while it is being executed.
+
+The `catch` statement allows you to define a block of code to be executed, if an error occurs in the try block.
+
+```csharp
+try
+{
+  int[] myNumbers = { 1, 2, 3 };
+  Console.WriteLine(myNumbers[10]);
+}
+catch (Exception e)
+{
+  Console.WriteLine("Something went wrong.");
+}
+```
+
+Exception manipulation: By saving the exception in `e`, you can execute manipulate some functionnalities around the exception. For instance a `Console.WriteLine(e.Message);` will return the predifined error message.
+
+**Work with specific exceptions:**
+It is also possible to threat specific exceptions by defining their name in the catch statement.
+```csharp
+try {
+    // Something
+} 
+catch(NullReferenceException) {
+    // Do something in case we encounter the NullReferenceException 
+} 
+catch (Exception) {
+    //Do something for all the other exceptions
+}
+```
+
+### **Try Catch Finally**
+The `finally` statement lets you execute code, after try...catch, regardless of the result.
+
+```csharp
+try
+{
+  int[] myNumbers = { 1, 2, 3 };
+  Console.WriteLine(myNumbers[10]);
+}
+catch (Exception e)
+{
+  Console.WriteLine("Something went wrong.");
+}
+finally
+{
+  Console.WriteLine("The 'try catch' is finished.");
+}
+```
+
+### **Throw**
+The `throw` statement allows you to create a custom error.<br>
+The `throw` statement is used together with an **exception class**. There are many exception classes available in C#: `ArithmeticException, FileNotFoundException, IndexOutOfRangeException, TimeOutException`, etc
+
+```csharp
+if (age < 18)
+{
+    throw new ArithmeticException("Access denied - You must be at least 18 years old.");
+}
+else
+{
+    Console.WriteLine("Access granted - You are old enough!");
+}
 ```
