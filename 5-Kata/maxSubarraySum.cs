@@ -26,7 +26,7 @@ public static class Kata
       }
     }
     
-    return maxSum > 0 ? maxSum : 0;
+    return maxSum;
   }
 }
 
