@@ -85,3 +85,40 @@ public class Spiralizor
       return spiralArr;
     }
 }
+
+
+
+/* Others ideas (not by me) */
+
+// Summerized
+public static int[,] Spiralize(int size)
+{
+    int[,] result = new int[size, size];
+    for (int s = 0; s < (size + 1) / 2; s++)
+        for (int i = s; i < size - s; i++)
+            for (int j = s; j < size - s; j++)
+                result[i, j] = (i != s + 1 || j != s || (s * 2 + 2 == size && s % 2 == 1)) ? (s + 1) % 2 : s % 2;
+    return result;
+}
+
+// Interesting
+public static int[,] Spiralize(int size)
+{
+    //it does 'size' number of turns!
+    int[,] spiral = new int[size, size];
+    (int, int)[] moves = new (int, int)[] {(0, 1), (1, 0), (0, -1), (-1, 0)};
+    (int, int) coordinates = (0, 0);
+
+    spiral[0,0] = 1;
+    for (int turn = 0; turn < size; turn++){
+        (int, int) move = moves[turn % 4];
+        //size - 1, size - 1, size - 1, size - 3, size - 3, size - 5, size - 5, size - 7...
+        for (int i = ((turn == 0) ? (size - 1) : (size - ((turn - 1) | 1))); i > 0; i--){
+            coordinates.Item1 += move.Item1;
+            coordinates.Item2 += move.Item2;
+            spiral[coordinates.Item1, coordinates.Item2] = 1;
+        }
+    }
+
+    return spiral;
+}
