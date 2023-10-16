@@ -1,6 +1,30 @@
 
+/* FINAL SOLUTION 
+I removed the recursive calls that were all useless and prefered to save the last 2 values.
+*/
+using System.Collections.Generic;
 
-
+public class ProdFib {
+    public static ulong[] productFib(ulong prod) {
+      ulong lastProduct = 0;
+      List<ulong> lastNumbers = new List<ulong> {0, 1};
+      
+      do
+      {
+        lastNumbers.Add( lastNumbers[0] + lastNumbers[1] );
+        lastProduct = lastNumbers[1] * lastNumbers[2];
+        lastNumbers.RemoveAt(0);
+      } while (lastProduct < prod);
+      
+      ulong[] result = {
+        lastNumbers[0],
+        lastNumbers[1],
+        (ulong) ((lastProduct == prod) ? 1 : 0)
+      };
+        
+      return result;
+    }    
+}
 
 
 
