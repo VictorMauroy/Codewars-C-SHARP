@@ -59,3 +59,24 @@ public static BigInteger SquaredExp(BigInteger baseNum, BigInteger exp)
 
     return result;
 }
+
+/* Next, I heard about a bit level optimization and made one.
+            and... that was still not enough ahah 
+            It's still able to quickly found a result for 7 digits exponents. */
+public static BigInteger SquaredExpWithBit(BigInteger baseNum, BigInteger exp)
+{
+    BigInteger result = 1;
+
+    while (exp != 0)
+    {
+        if ((exp & 1) == 1)
+        {
+            result *= baseNum;
+        }
+
+        baseNum *= baseNum;
+        exp >>= 1;
+    }
+
+    return result;
+}
