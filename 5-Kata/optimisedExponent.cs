@@ -5,37 +5,57 @@ It couldn't handle extremely large computations. The estimated limit for quick r
 using System.Numerics;
 class LastDigit
 {
-public static int GetLastDigit(BigInteger n1, BigInteger n2)
-{
-    if (n1 == 0 && n2 == 0)
-        return 1;
-    
-    if(n1 == 10)
-    return 0;
+    public static int GetLastDigit(BigInteger n1, BigInteger n2)
+    {
+        if (n1 == 0 && n2 == 0)
+            return 1;
+        
+        if(n1 == 10)
+        return 0;
 
-    BigInteger expResult = SquareExponent(n1, n2);
+        BigInteger expResult = QuickExponent(n1, n2);
 
-    string expStr = expResult.ToString();
-    return int.Parse(expStr.Substring(expStr.Length - 1));
+        string expStr = expResult.ToString();
+        return int.Parse(expStr.Substring(expStr.Length - 1));
+    }
+
+    public static BigInteger QuickExponent(BigInteger num, BigInteger exp)
+    {
+        if (exp == 1)
+            return num;
+
+        if (exp == 0)
+            return 1;
+
+        if (exp % 2 == 0)
+        {
+            BigInteger halfExp = QuickExponent(num, exp / 2);
+            return halfExp * halfExp;
+        }
+        else
+        {
+            BigInteger halfExp = QuickExponent(num, exp / 2);
+            return halfExp * halfExp * num;
+        }
+    }
 }
 
-public static BigInteger SquareExponent(BigInteger num, BigInteger exp)
+/* Later, I found out about the squared exponent computation and made one. *
+    But that wasn't enough */
+public static BigInteger SquaredExp(BigInteger baseNum, BigInteger exp)
 {
-    if (exp == 1)
-        return num;
+    BigInteger result = 1;
 
-    if (exp == 0)
-        return 1;
+    while (exp != 0)
+    {
+        if (exp % 2 != 0)
+        {
+            result *= baseNum;
+        }
 
-    if (exp % 2 == 0)
-    {
-        BigInteger halfExp = SquareExponent(num, exp / 2);
-        return halfExp * halfExp;
+        baseNum *= baseNum;
+        exp /= 2;
     }
-    else
-    {
-        BigInteger halfExp = SquareExponent(num, exp / 2);
-        return halfExp * halfExp * num;
-    }
-}
+
+    return result;
 }
