@@ -1,3 +1,8 @@
+/* Description :
+Define a function that takes in two non-negative integers "a" and "b" and returns the last decimal digit of "a power b". 
+Note that a and b may be very large!
+*/
+
 
 /* At first, I found that idea. It was pretty good at doing exponent computation but...
 It couldn't handle extremely large computations. The estimated limit for quick result is around 6 digits exponent power.*/
@@ -91,7 +96,7 @@ class LastDigit
     public static int GetLastDigit(BigInteger n1, BigInteger n2)
     {
         BigInteger result = 1;
-        
+
         while (n2 > 0) {
             if (n2 % 2 == 1) 
                 result = (result * n1) % 10;
@@ -103,3 +108,7 @@ class LastDigit
         return (int)result;
     }
 }
+
+/* There was a predefined function (but the program would have been annoying) */
+public static int GetLastDigit(BigInteger n1, BigInteger n2)
+    => (int)BigInteger.ModPow(n1, n2, 10);
