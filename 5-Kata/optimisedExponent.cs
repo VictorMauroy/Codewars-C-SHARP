@@ -80,3 +80,26 @@ public static BigInteger SquaredExpWithBit(BigInteger baseNum, BigInteger exp)
 
     return result;
 }
+
+
+/* Well, after more research : I found a theorem called "Euler's theorem".
+    By using its principle, I can get the result without bothering to completely calculate the power. */
+using System.Numerics;
+  
+class LastDigit
+{
+    public static int GetLastDigit(BigInteger n1, BigInteger n2)
+    {
+        BigInteger result = 1;
+        
+        while (n2 > 0) {
+            if (n2 % 2 == 1) 
+                result = (result * n1) % 10;
+            
+            n1 = (n1 * n1) % 10;
+            n2 /= 2;
+        }
+        
+        return (int)result;
+    }
+}
