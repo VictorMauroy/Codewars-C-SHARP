@@ -53,3 +53,21 @@ public static class Kata
     return validCount;
   }
 }
+
+// SECOND TRY
+public static int CountSmileys(string[] smileys) 
+{
+    int validCount = 0;
+    foreach(string smiley in smileys){
+        if(Regex.IsMatch(smiley, @"(:|;)(-|~)?(\)|D)"))
+        validCount++;
+    }
+    return validCount;
+}
+
+
+// Made by other peoples
+public static int CountSmileys(string[] smileys) 
+{
+    return smileys.Count(s => Regex.IsMatch(s, @"^[:;]{1}[~-]{0,1}[\)D]{1}$"));
+}
