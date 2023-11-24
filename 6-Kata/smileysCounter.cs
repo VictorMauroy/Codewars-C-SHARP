@@ -25,3 +25,31 @@ public static int CountSmileys(string[] smileys)
   => smileys.Aggregate( 
     0, (acc, smileyStr) => acc + (Regex.IsMatch(smileyStr, @"(:|;)(-|~)?(\)|D)") ? 1 : 0)
   );
+
+
+
+// FIRST TRY
+public static class Kata
+{
+  public static int CountSmileys(string[] smileys) 
+  {    
+    int validCount = 0;
+    for(int i = 0; i < smileys.Length; i++) {
+      
+      if(smileys[i][0] == ':' || smileys[i][0] == ';'){ // Has valid eyes ?
+        
+        if(smileys[i].Length > 2 && smileys[i].Length < 4){ // Has nose ?
+          if((smileys[i][1] == '-' || smileys[i][1] == '~') && 
+              (smileys[i][2] == ')' || smileys[i][2] == 'D')) { // Mouth and nose valid ? 
+            validCount++;
+          }
+          else if(smileys[i].Length == 2 && 
+            (smileys[i][1] == ')' || smileys[i][1] == 'D')) { // Valid mouth ?
+          validCount++; 
+          }
+        }
+      }
+    }
+    return validCount;
+  }
+}
