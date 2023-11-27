@@ -1,3 +1,25 @@
+/* Description :
+Complete the solution so that it strips all text that follows any of a set of comment markers passed in. 
+Any whitespace at the end of the line should also be stripped out.
+
+Example:
+
+Given an input string of:
+
+apples, pears # and bananas
+grapes
+bananas !apples
+The output expected would be:
+
+apples, pears
+grapes
+bananas
+The code would be called like so:
+
+string stripped = StripCommentsSolution.StripComments("apples, pears # and bananas\ngrapes\nbananas !apples", new [] { "#", "!" })
+// result should == "apples, pears\ngrapes\nbananas"
+*/
+
 
 
 /* First attempt */
@@ -21,6 +43,8 @@ public class StripCommentsSolution
 }
 
 
+
+
 /* Second attempt => shortened */
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -30,6 +54,9 @@ public static string StripComments(string text, string[] commentSymbols)
             line, 
             @"\s*([" + string.Concat(commentSymbols) + @"].*)|(\s*$)",
             "")));
+
+
+
 
 
 /* Made by other peoples : */
