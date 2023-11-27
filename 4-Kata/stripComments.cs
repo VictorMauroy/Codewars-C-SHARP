@@ -30,3 +30,21 @@ public static string StripComments(string text, string[] commentSymbols)
             line, 
             @"\s*([" + string.Concat(commentSymbols) + @"].*)|(\s*$)",
             "")));
+
+
+/* Made by other peoples : */
+
+// Without using Regular expressions.
+using System;
+using NUnit.Framework;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text;
+
+public class StripCommentsSolution
+{
+        public static string StripComments(string text, string[] commentSymbols)
+        {
+           return String.Join('\n', text.Split('\n').Select(str => str.Split(commentSymbols, 0)[0].TrimEnd()));
+        }
+}
