@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+// First try for that kata.
 public class WeightSort {
     public static string orderWeight(string str) {
         List<string> numbers = str.Split(" ").ToList();
@@ -24,3 +25,14 @@ public class WeightSort {
           .ToList());
     }
 }
+
+// Second solution that I found (it was originaly my first idea but I lost a lot of time because I misunderstood the kata description )
+public static string orderWeight(string str) {
+    return string.Join(
+      " ", 
+      str.Split(" ")
+         .OrderBy(number => number.Select(x => (int)x - 48).Sum() )
+         .ThenBy(num => num.ToString() )
+    );
+}
+
