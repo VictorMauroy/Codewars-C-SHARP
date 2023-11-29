@@ -19,7 +19,7 @@ public class WeightSort {
           " ",
           rankedNumbers
           .OrderBy(x => x.Value)
-          .ThenByDescending(c => c.Key.ToString().Length)
+          .ThenBy(c => c.Key.ToString())
           .Select(c => c.Key)
           .ToList());
     }
