@@ -5,21 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class WeightSort {
-	
-	public static string orderWeight(string str) {
-		List<int> numbers = str.Split(" ").Select(num => int.Parse(num)).ToList();
-    Dictionary<int, int> rankedNumbers = new Dictionary<int, int>();
-    
-    foreach(int num in numbers){
-      rankedNumbers[num] = num.ToString().Length;
+    public static string orderWeight(string str) {
+        List<string> numbers = str.Split(" ").ToList();
+        Dictionary<string, int> rankedNumbers = new Dictionary<string, int>();
+
+        foreach (string num in numbers)
+        {
+            rankedNumbers[num] = num.ToString().Select(x => (int)x -48).Sum();
+            Console.WriteLine("Key: " + num + ", value: " + rankedNumbers[num]);
+        }
+
+        return string.Join(
+          " ",
+          rankedNumbers
+          .OrderBy(x => x.Value)
+          .ThenByDescending(c => c.Key.ToString().Length)
+          .Select(c => c.Key)
+          .ToList());
     }
-    
-    return string.Join(
-      " ", 
-      rankedNumbers
-      .OrderBy(x => x.Key)
-      .ThenBy(c => c.Value)
-      .Select(c => c.Key)
-      .ToList());
-	}
 }
