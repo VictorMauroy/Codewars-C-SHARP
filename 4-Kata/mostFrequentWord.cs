@@ -10,6 +10,7 @@ public class TopWords
       {
           List<string> words = Regex.Split(text, @"[^\w']+").ToList();
           return (from word in words
+                  where !string.IsNullOrWhiteSpace(word)
                   group word.ToLower() by word into newGroup
                   orderby newGroup.Count() descending
                   select newGroup.Key).Take(3).ToList();
