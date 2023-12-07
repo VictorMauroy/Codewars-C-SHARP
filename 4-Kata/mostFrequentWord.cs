@@ -8,8 +8,8 @@ public class TopWords
 {
     public static List<string> Top3(string text)
     {
-        List<string> words = Regex.Matches(text, @"(\w+'{0,1}\w*)").Select(m => m.Value.ToLower()).ToList();
-        return (from word in words
+      var words = Regex.Matches(text, @"([a-zA-Z]+'{0,1}[a-zA-Z]*)").Select(m => m.Value.ToLower());
+      return (from word in words
               where !string.IsNullOrWhiteSpace(word)
               group word by word into newGroup
               orderby newGroup.Count() descending
